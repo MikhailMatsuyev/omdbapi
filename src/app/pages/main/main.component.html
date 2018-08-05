@@ -1,0 +1,27 @@
+<form class="main-form">
+  <mat-form-field class="main-full-width">
+    <input matInput placeholder="Type movie's title" aria-label="State" [matAutocomplete]="auto" [formControl]="movieCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let movie of movies" [value]="movie.Title" (click)="handleClickMovie(movie.imdbID)">
+        <span>{{movie.Title}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+<mat-card class="main-card" *ngIf="!notFound">
+  <mat-card-header>
+    <mat-card-title>About</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>Title: {{(info$ | async)?.Title}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Year: {{(info$ | async)?.Year}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Production: {{(info$ | async)?.Production}} </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
